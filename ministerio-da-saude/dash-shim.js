@@ -16,7 +16,7 @@
     if (loading[id]) return; loading[id] = true;
     store[id] = {status: 'loading', data: []};
     const csv = !id.startsWith('galeria_');
-    fetch(BASE + id + (csv ? '.csv' : '.json'), {cache: 'no-cache'}).then(r => { if (!r.ok) throw new Error(r.status); return csv ? r.text() : r.json(); })
+    fetch(BASE + id + (csv ? '.csv' : '.json') + '?v=' + Date.now(), {cache: 'no-store'}).then(r => { if (!r.ok) throw new Error(r.status); return csv ? r.text() : r.json(); })
       .then(x => { store[id] = {status: 'ok', data: csv ? d3.csvParse(x) : x}; notify(); })
       .catch(e => { console.error(id, e); store[id] = {status: 'error', data: [], error: String(e)}; notify(); });
   }
