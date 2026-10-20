@@ -330,7 +330,7 @@ const pct = new Intl.NumberFormat('pt-BR', {style: 'percent', maximumFractionDig
 const ACC = () => dash.colors[0];
 const MUTED = 'var(--cds-chart-muted)';
 const CORDEM = ['Boletins de Conjuntura', 'Eventos e cursos', 'Publicações', 'Exposição e audiovisual', 'Papelaria institucional', 'Marca e identidades', 'Dataviz, infográficos e design system', 'Ilustração'];
-const ORDEM = ['Dataviz, infográficos e design system', 'Publicações', 'Ilustração', 'Eventos e cursos', 'Exposição e audiovisual', 'Papelaria institucional', 'Marca e identidades'];
+const ORDEM = ['Dataviz, infográficos e design system', 'Publicações', 'Exposição e audiovisual', 'Ilustração', 'Eventos e cursos', 'Marca e identidades', 'Papelaria institucional'];
 
 dash.calc('resumo', {
   inputs: ['projetos'],
@@ -343,7 +343,7 @@ dash.calc('resumo', {
     const eventos = projetos.filter(p => p.linha === 'Eventos e cursos').length;
     const linhas = new Set(projetos.map(p => p.linha)).size;
     return [{projetos: projetos.length, pecas, componentes, eventos, linhas,
-      frase: `${projetos.length} projetos e ${pecas.toLocaleString('pt-BR')} itens produzidos para a SAPS (2021–2022) e para o Desid (desde o fim de 2022), em ${linhas} linhas de trabalho: dataviz, infográficos e design system, publicações (incluindo os boletins de conjuntura), ilustração, eventos, audiovisual, papelaria institucional e marca.`}];
+      frase: `${projetos.length} projetos e ${pecas.toLocaleString('pt-BR')} itens produzidos para a SAPS (2021–2022) e para o Desid (desde o fim de 2022), em ${linhas} linhas de trabalho: dataviz, infográficos e design system, publicações (incluindo os boletins de conjuntura), exposição e audiovisual, ilustração, eventos e cursos, marcas e identidades e papelaria institucional.`}];
   }
 });
 
