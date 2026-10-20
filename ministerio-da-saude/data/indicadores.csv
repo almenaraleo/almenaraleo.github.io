@@ -1,0 +1,11 @@
+indicador,valor,nota
+edicoes_boletim,104,"Edições numeradas dos Boletins de Conjuntura, todas diagramadas e revisadas até a validação"
+graficos_boletim,123,Gráficos vetoriais únicos produzidos para os boletins
+arquivos_inventariados,15198,"Arquivos na pasta de trabalho Desid em 15/10/2026, antes da peneira"
+arquivos_fonte_desid,234,"Contagem conservadora de arquivos-fonte sob gestão direta nas pastas compartilhadas do Desid (19/10/2026), sem versões, cópias, auto-saves, exportações, assets, banco de imagens e Creative Cloud; 4 arquivos estão em pastas sem projeto no portfólio"
+fonte_Illustrator,87,Arquivos-fonte do Desid por programa
+fonte_Photoshop,77,Arquivos-fonte do Desid por programa
+fonte_InDesign,37,Arquivos-fonte do Desid por programa
+fonte_After Effects,26,Arquivos-fonte do Desid por programa
+fonte_Premiere,5,Arquivos-fonte do Desid por programa
+fonte_Procreate,2,Arquivos-fonte do Desid por programa

@@ -1,0 +1,30 @@
+id,origem,ciclo,produto,ano,titulo,descricao,projeto
+p01,SAPS,2021–2022,1,2021,Previne Brasil: conceito e roteiro de conteúdos visuais,"Proposta conceitual e roteiro para conteúdos visuais sobre o Programa Previne Brasil, com foco na qualificação da gestão da Atenção Primária à Saúde.",Previne Brasil: relatórios e notas técnicas
+p02,SAPS,2021–2022,2,2022,Promoção da saúde e alimentação saudável: conceito e roteiro visual,"Proposta conceitual e roteiro para conteúdos visuais sobre promoção da saúde, com ênfase em alimentação saudável.",
+p03,SAPS,2021–2022,3,2022,Ações estratégicas da APS: conceito e roteiro visual,Proposta conceitual e roteiro para conteúdos visuais sobre ações programáticas e estratégicas da Atenção Primária.,
+p04,SAPS,2021–2022,4,2022,Saúde bucal no SUS: conceito e roteiro visual,Proposta conceitual e roteiro para conteúdos visuais sobre a promoção da saúde bucal no SUS e a qualificação da gestão em saúde bucal.,Boletim SB Brasil
+p05,SAPS,2021–2022,5,2022,Informatização da APS: conceito e roteiro visual,Proposta conceitual e roteiro para conteúdos visuais sobre a informatização da Atenção Primária à Saúde.,
+p06,Desid,2023,1,2023,Projetos visuais para a exposição dos 20 anos da Economia da Saúde,"Levantamento das atividades e iniciativas do departamento, com proposta de projetos visuais para a exposição cultural sobre os 20 anos da Economia da Saúde no Ministério.",ExpoECOS
+p07,Desid,2023,2,2023,Gestão de projetos visuais para divulgação do Desid,Proposta de gestão de projetos visuais para a propagação dos produtos e das ações do departamento.,
+p08,Desid,2023,3,2023,Memória visual do Desid,Mapeamento das necessidades de organização e atualização da memória visual do departamento.,Identidade visual do Desid
+p09,Desid,2023,4,2023,Difusão visual das ferramentas do Desid,Planejamento de ações visuais que favoreçam a difusão das principais ferramentas do departamento.,Logos das ferramentas Desid
+p10,Desid,2023,5,2023,Proposta conceitual de materiais do Desid,Proposta conceitual e criativa de materiais para a propagação dos produtos do departamento e sua contribuição para a gestão do SUS.,
+p11,Desid,2023,6,2023,Avaliação das ações de divulgação,Avaliação de resultados preliminares das ações de divulgação das ferramentas e dos produtos do departamento.,
+p12,Desid,2024,1,2024,Boletim informativo do Desid,"Projeto gráfico e editorial do boletim informativo sobre as atividades do departamento, voltado aos demais departamentos do Ministério.",Boletim Desid / Conexão Desid
+p13,Desid,2024,2,2024,Direção de arte de vídeos sobre Economia da Saúde,Projeto gráfico e direção de arte de vídeos para divulgação das temáticas da Economia da Saúde.,Animação institucional Desid
+p14,Desid,2024,3,2024,Web design da plataforma da Rede ECOS,Proposta de web design e atualização de layout da nova plataforma da Rede ECOS.,Rede ECOS
+p15,Desid,2024–2025,1,2024,Identidade visual do PNGC,Projeto de identidade visual para o Programa Nacional de Gestão de Custos.,PNGC
+p16,Desid,2024–2025,2,2024,Identidade visual do Workshop SHA no Brasil,Identidade visual do Workshop System of Health Accounts (SHA) no Brasil: potencial e institucionalização.,SHA no Brasil – OCDE
+p17,Desid,2024–2025,3,2025,Diretrizes dos Núcleos de Economia da Saúde,"Projeto editorial, projeto gráfico e diagramação da publicação Atualização das Diretrizes e Estruturação dos Núcleos de Economia da Saúde.",Diretrizes dos Núcleos de Economia da Saúde
+p18,Desid,2025,1,2025,Campanha de divulgação da Rede ECOS,"Projeto gráfico da campanha de divulgação da Rede ECOS para gestores, pesquisadores, trabalhadores do SUS e público em geral.",Rede ECOS
+p19,Desid,2025,2,2025,Template de apresentação institucional,Modelo de apresentação em PowerPoint para uso padronizado em todas as coordenações e nos eventos do departamento.,Modelos de apresentação (PPT)
+p20,Desid,2025,3,2025,Projeto editorial dos Boletins de Conjuntura,"Projeto editorial e gráfico dos Boletins de Conjuntura nas séries Indústria, Comércio, Comércio Exterior e Inflação.",Boletins de Conjuntura
+p21,Desid,2025,4,2025,Templates de posts para Instagram e WhatsApp,"Modelos de posts para divulgação de cursos, eventos e conteúdos sobre Economia da Saúde.",Cards de cursos e debates
+p22,Desid,2025,5,2025,Campanha nacional pela criação de Núcleos de Economia da Saúde,Projeto gráfico de campanha nacional para estimular a criação de novos Núcleos de Economia da Saúde em estados e municípios.,Campanha Crie um NES
+p23,Desid,2025,6,2025,Econópolis em animação,"Adaptação de personagens, cenários e elementos do universo de Econópolis para vídeos de animação.",Personagens para vídeos (UFRN)
+p24,Desid,2026,1,2026,Identidade visual do PNGC: diretrizes e aplicações,"Identidade visual do Programa Nacional de Gestão de Custos, com diretrizes gráficas, logotipo, paleta e aplicações institucionais.",PNGC
+p25,Desid,2026,2,2026,Identidade do Seminário Planos de Saúde e SUS,"Identidade visual do Seminário Planos de Saúde e SUS: Evidências, Desigualdades e Políticas, com peças digitais e impressas.",Seminário Planos de Saúde e SUS
+p26,Desid,2026,3,2026,Edição especial do Boletim de Conjuntura: inflação,Projeto editorial e gráfico da edição especial dedicada à inflação de saúde.,Boletins de Conjuntura
+p27,Desid,2026,4,2026,Manual de Transmissão de Dados do ApuraSUS,"Projeto editorial e gráfico do manual, com estrutura de capítulos, hierarquia visual e elementos gráficos.",Manual ApuraSUS
+p28,Desid,2026,5,2026,Novo projeto editorial dos Boletins de Conjuntura,"Novo projeto editorial e gráfico dos Boletins de Conjuntura, com foco na tradução visual de dados complexos.",Boletins de Conjuntura
+p29,Desid,2026,6,2026,Desid em Dados: visualização de dados,"Projeto de visualização de dados baseado no Núcleo de Dados do Desid, com design da informação, infográficos e interface digital.",Desid em Dados

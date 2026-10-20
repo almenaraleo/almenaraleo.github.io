@@ -1,0 +1,1006 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design no Ministério da Saúde 2021–2026 · Leonardo Faria Almenara</title>
+<meta name="description" content="Portfólio de Leonardo Faria Almenara: design da informação, visualização de dados, design editorial e sistemas de identidade visual no Ministério da Saúde (SAPS e Desid), 2021–2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<script src="d3.min.js"></script>
+<script src="dash-shim.js"></script>
+<style>
+:root {
+  color-scheme: light dark;
+  --font-anthropic-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-anthropic-serif: "Source Serif 4", ui-serif, Georgia, serif;
+  --cds-font-size-caption: .75rem; --cds-font-size-body: .875rem; --cds-font-size-heading: .9375rem; --cds-font-size-title: 1.5rem; --cds-font-weight-medium: 500;
+  --cds-gap-xs: .5rem; --cds-gap-sm: .75rem; --cds-gap-md: 1rem; --cds-gap-lg: 1.75rem; --cds-gap-xl: 2.5rem;
+  --cds-pad-xs: .375rem; --cds-pad-sm: .5rem; --cds-pad-md: .75rem; --cds-pad-lg: 1rem; --cds-radius: .5rem; --cds-dur-slow: .45s;
+  --color-bg: #faf9f6; --color-panel: #ffffff; --color-fg: #0b0b0b; --color-fg-muted: #6d6b67; --color-border-line: rgba(11,11,11,.10); --color-bad: #c43c3b;
+  --cds-border: rgba(11,11,11,.10); --cds-chart-axis: #c3c2b7; --cds-chart-grid: rgba(11,11,11,.10); --cds-chart-muted: #c3c2b7; --cds-text-secondary: #52514e;
+  --cds-surface-popover: #ffffff; --cds-shadow-popover: 0 8px 24px #0000001f, 0 2px 6px #00000014;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #151515; --color-panel: #20201f; --color-fg: #f0efec; --color-fg-muted: #a5a49a; --color-border-line: rgba(255,255,255,.12); --color-bad: #e66767;
+    --cds-border: rgba(255,255,255,.12); --cds-chart-axis: #383835; --cds-chart-grid: rgba(255,255,255,.10); --cds-chart-muted: #5f5e5a; --cds-text-secondary: #c3c2b7;
+    --cds-surface-popover: #20201f; --cds-shadow-popover: 0 8px 24px #00000052, 0 2px 6px #0003;
+  }
+}
+html { background: var(--color-bg); }
+body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); font-size: var(--cds-font-size-body); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+.site { max-width: 72rem; margin: 0 auto; padding: 2rem 16px 4rem; box-sizing: border-box; }
+.site-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: 1.5rem; }
+.site-top a { color: inherit; }
+.site-foot { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--color-border-line); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+img { max-width: 100%; }
+h2 { font-size: var(--cds-font-size-heading); font-weight: 600; margin: 0; }
+.note { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); margin: 0; }
+.dash-skeleton { color: transparent !important; background: linear-gradient(90deg, var(--color-border-line), transparent, var(--color-border-line)); background-size: 200% 100%; animation: sk 1.4s linear infinite; border-radius: 4px; }
+@keyframes sk { to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .dash-skeleton { animation: none; } }
+</style>
+</head>
+<body>
+<div class="site">
+<nav class="site-top"><a href="../">← Leonardo Faria Almenara</a><span>Portfólio · Ministério da Saúde</span></nav>
+<style>
+.pf { display: flex; flex-direction: column; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); font-variant-numeric: tabular-nums; }
+.pf-head h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0 0 var(--cds-gap-xs); text-wrap: balance; }
+.pf-head .pf-autor { margin: 0 0 var(--cds-gap-sm); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); letter-spacing: .02em; }
+.pf-head p { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-body); max-width: 70ch; }
+.pf-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--cds-gap-md); }
+.pf-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
+.pf-tile .lab { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pf-tile .val { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); line-height: 1.1; }
+.pf-tile .sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--cds-gap-md); }
+.pf-card { position: relative; background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
+.pf-card h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; text-wrap: balance; }
+.pf-card .note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0; }
+.pf-chart { width: 100%; }
+.pf-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pf-legend span { display: inline-flex; align-items: center; gap: var(--cds-gap-xs); }
+.pf-legend i { width: 0.75rem; height: 0.75rem; border-radius: 3px; display: inline-block; }
+.pf-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); max-width: 16rem; z-index: 2; }
+.pf-tip .t { color: var(--cds-text-secondary); }
+.pf-tools { display: flex; gap: var(--cds-gap-sm); flex-wrap: wrap; align-items: center; }
+.pf-tools input, .pf-tools select { font: inherit; font-size: var(--cds-font-size-body); padding: var(--cds-pad-xs) var(--cds-pad-sm); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-bg); color: var(--color-fg); min-width: 0; }
+.pf-tools input { flex: 1 1 12rem; }
+.pf-tablebox { max-height: 32rem; overflow: auto; }
+.pf-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-body); }
+.pf-table th { position: sticky; top: 0; background: var(--color-panel); text-align: left; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); }
+.pf-table th button { all: unset; cursor: pointer; }
+.pf-table th button:focus-visible { outline: 2px solid var(--color-fg); }
+.pf-table td { padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+.pf-table td.num { text-align: right; white-space: nowrap; }
+.pf-table .bar { display: inline-block; height: 0.5rem; border-radius: 4px; margin-right: var(--cds-gap-xs); vertical-align: middle; }
+.pf-table .desc { display: block; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pf-pill { display: inline-block; font-size: var(--cds-font-size-caption); padding: 0 var(--cds-pad-sm); border-radius: 999px; border: 1px solid var(--color-border-line); white-space: nowrap; }
+.pf-pill.sem { border-color: transparent; color: var(--color-bg); }
+@media (max-width: 40rem) { .pf-table .hide-sm { display: none; } }
+
+.pf-nav { display: flex; gap: var(--cds-gap-xs); border-bottom: 1px solid var(--color-border-line); }
+.pf-nav button { font: inherit; font-size: var(--cds-font-size-body); background: none; border: 0; border-bottom: 2px solid transparent; padding: var(--cds-pad-sm) var(--cds-pad-md); color: var(--color-fg-muted); cursor: pointer; }
+.pf-nav button[aria-selected=true] { color: var(--color-fg); border-bottom-color: var(--color-fg); }
+.pf-nav button:focus-visible, .pf-chip:focus-visible, .pf-pcard:focus-visible, .pf-back:focus-visible, .pf-tile.link:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.pf-tile.link { cursor: pointer; }
+.pf-tile.link:hover { border-color: var(--color-fg-muted); }
+.pf-chips { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); }
+.pf-chip { font: inherit; font-size: var(--cds-font-size-caption); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-radius: 999px; border: 1px solid var(--color-border-line); background: var(--color-bg); color: var(--color-fg); cursor: pointer; }
+.pf-chips.orig .pf-chip { font-size: inherit; padding: var(--cds-pad-xs) var(--cds-pad-md, 0.9rem); }
+.pf-chip[aria-pressed=true] { background: var(--color-fg); color: var(--color-bg); border-color: var(--color-fg); }
+.pf-prods { display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
+.pf-prods h3 { margin: var(--cds-gap-md) 0 0; font-size: 1rem; }
+.pf-prods .note { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.pf-prod { display: grid; grid-template-columns: 7.5rem 1fr; gap: var(--cds-gap-xs) var(--cds-gap-md); padding: var(--cds-gap-sm) 0; border-top: 1px solid var(--color-border-line); }
+.pf-prod .n { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); padding-top: .15rem; }
+.pf-prod p { margin: .2rem 0 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.pf-prod .pf-back { margin-top: var(--cds-gap-xs); }
+@media (max-width: 34rem) { .pf-prod { grid-template-columns: 1fr; } }
+.pf-pboard { display: grid; grid-template-columns: repeat(var(--n, 6), minmax(0, 1fr)); gap: var(--cds-gap-sm); margin-top: var(--cds-gap-sm); }
+.pf-pcol { display: flex; flex-direction: column; gap: var(--cds-gap-xs); min-width: 0; }
+.pf-pyr { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--color-border-line); padding-bottom: .25rem; font-weight: 600; }
+.pf-pyr small { color: var(--color-fg-muted); font-weight: 400; font-size: var(--cds-font-size-caption); }
+.pf-ptoks { display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
+.pf-ptok { font: inherit; text-align: left; cursor: pointer; background: var(--color-panel); color: var(--color-fg); border: 1px solid var(--color-border-line); border-left: 3px solid var(--c, var(--color-border-line)); border-radius: var(--cds-radius); padding: .35rem .5rem; display: flex; flex-direction: column; gap: .1rem; min-width: 0; }
+.pf-ptok .k { font-size: .7rem; letter-spacing: .03em; text-transform: uppercase; color: var(--color-fg-muted); }
+.pf-ptok .t { font-size: var(--cds-font-size-caption); line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.pf-ptok:hover { border-color: var(--color-fg-muted); border-left-color: var(--c, var(--color-fg-muted)); }
+.pf-ptok[aria-pressed="true"] { background: var(--color-bg); outline: 2px solid var(--color-fg); outline-offset: -1px; }
+.pf-ptok:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.pf-pdet { margin-top: var(--cds-gap-sm); background: var(--color-panel); border: 1px solid var(--color-border-line); border-left: 4px solid var(--c, var(--color-fg-muted)); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
+.pf-pdet .m { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pf-pdet p { margin: 0; color: var(--color-fg-muted); }
+.pf-pdet .act { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); margin-top: var(--cds-gap-xs); }
+@media (max-width: 48rem) { .pf-pboard { grid-template-columns: 1fr; } .pf-ptoks { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 9.5rem), 1fr)); } }
+.pf-traj { list-style: none; margin: 0 0 var(--cds-gap-sm); padding: 0; display: flex; flex-direction: column; gap: 2px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pf-traj span { display: inline-block; min-width: 6.5rem; font-variant-numeric: tabular-nums; color: var(--color-fg); }
+.pf-head .pf-autor b { color: var(--color-fg); font-weight: 600; }
+.pf-linkbtn { font: inherit; background: none; border: 0; padding: 0; color: var(--color-fg); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.pf-linkbtn:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.pf-eco { display: flex; flex-direction: column; gap: 0; }
+.pf-eco-mat { align-self: center; width: min(100%, 30rem); text-align: center; }
+.pf-eco-ramos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--cds-gap-md); border-top: 1px solid var(--color-border-line); padding-top: var(--cds-gap-md); margin-top: var(--cds-gap-md); position: relative; }
+.pf-eco-ramos::before { content: ''; position: absolute; left: 50%; top: calc(-1 * var(--cds-gap-md)); height: var(--cds-gap-md); border-left: 1px solid var(--color-border-line); }
+.pf-eco-ramo { display: flex; flex-direction: column; gap: var(--cds-gap-xs); min-width: 0; }
+.pf-eco-ramo h3 { margin: 0; font-size: var(--cds-font-size-caption); text-transform: uppercase; letter-spacing: .04em; color: var(--color-fg-muted); font-weight: 600; }
+.pf-eco-sis { font: inherit; text-align: left; cursor: pointer; color: var(--color-fg); background: var(--color-panel); border: 1px solid var(--color-border-line); border-left: 4px solid var(--c, var(--color-fg)); border-radius: var(--cds-radius); padding: .5rem .6rem; display: flex; flex-direction: column; gap: .15rem; }
+.pf-eco-sis b { font-weight: 600; }
+.pf-eco-sis small { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); line-height: 1.3; }
+.pf-eco-sis .k { font-size: .68rem; letter-spacing: .05em; text-transform: uppercase; color: var(--color-fg-muted); }
+.pf-eco-der { display: flex; flex-direction: column; gap: 4px; padding-left: .7rem; border-left: 1px solid var(--color-border-line); margin-left: .5rem; }
+.pf-eco-der button { font: inherit; font-size: var(--cds-font-size-caption); text-align: left; background: none; border: 0; padding: 1px 0; color: var(--color-fg-muted); cursor: pointer; }
+.pf-eco-der button:hover, .pf-eco-sis:hover b { text-decoration: underline; text-underline-offset: 3px; color: var(--color-fg); }
+.pf-eco-der span { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: 1px 0; }
+.pf-eco-sis:focus-visible, .pf-eco-der button:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+@media (max-width: 52rem) { .pf-eco-ramos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 32rem) { .pf-eco-ramos { grid-template-columns: 1fr; } }
+.pf-prodhead { margin-top: var(--cds-gap-sm); font-weight: 600; font-size: var(--cds-font-size-caption); text-transform: uppercase; letter-spacing: .04em; color: var(--color-fg-muted); }
+.pf-pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); gap: var(--cds-gap-md); }
+.pf-pcard { all: unset; box-sizing: border-box; cursor: pointer; display: flex; flex-direction: column; background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); overflow: hidden; min-width: 0; }
+.pf-pcard:hover { border-color: var(--color-fg-muted); }
+.pf-ghead { grid-column: 1 / -1; display: flex; align-items: baseline; gap: var(--cds-gap-sm); margin: var(--cds-gap-md) 0 0; padding-bottom: var(--cds-pad-xs); border-bottom: 1px solid var(--color-border-line); }
+.pf-ghead:first-child { margin-top: 0; }
+.pf-ghead i { width: .6rem; height: .6rem; border-radius: 2px; display: inline-block; }
+.pf-ghead b { font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-heading); }
+.pf-ghead span { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pf-pcard.feat { grid-column: span 2; border-color: var(--color-fg-muted); }
+.pf-pcard.feat .pf-cover { aspect-ratio: 8 / 3; }
+@media (max-width: 34rem) { .pf-pcard.feat { grid-column: auto; } .pf-pcard.feat .pf-cover { aspect-ratio: 4 / 3; } }
+.pf-pill.dest { background: var(--color-fg); color: var(--color-bg); border-color: var(--color-fg); }
+.pf-cover { aspect-ratio: 4 / 3; width: 100%; background: var(--color-bg); position: relative; overflow: hidden; }
+.pf-cover img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+.pf-ph { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; padding: var(--cds-pad-lg); background: var(--color-panel); border-bottom: 1px solid var(--color-border-line); }
+.pf-ph .k { font-size: var(--cds-font-size-caption); letter-spacing: .06em; text-transform: uppercase; color: var(--color-fg-muted); }
+.pf-ph .t { font-family: var(--font-anthropic-sans); font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-heading); line-height: 1.2; color: var(--color-fg); text-wrap: balance; }
+.pf-ph .r { width: 2rem; height: 3px; border-radius: 2px; margin-bottom: 4px; }
+.pf-detail .big .pf-ph { position: relative; inset: auto; width: 100%; min-height: 16rem; border: 0; }
+.pf-tools-sw { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 var(--cds-gap-sm); }
+.pf-tools-sw em { font-style: normal; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); align-self: center; min-width: 3.2rem; }
+.pf-tools-sw span { font-size: var(--cds-font-size-caption); padding: 2px 10px; border-radius: 999px; border: 1px solid var(--color-border-line); color: var(--color-fg-muted); }
+.pf-biggrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: var(--cds-gap-md); }
+.pf-biggrid .pf-thumb .im { aspect-ratio: 4 / 3; }
+.pf-biggrid .pf-thumb span { font-size: var(--cds-font-size-body); -webkit-line-clamp: 3; }
+.pf-pbody { padding: var(--cds-pad-md); display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
+.pf-pbody b { font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-body); line-height: 1.3; }
+.pf-meta { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); align-items: center; }
+.pf-count { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pf-detail { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--cds-gap-xl); align-items: start; }
+@media (max-width: 48rem) { .pf-detail { grid-template-columns: minmax(0, 1fr); } }
+.pf-detail .big { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); overflow: hidden; position: relative; min-height: 16rem; display: flex; align-items: center; justify-content: center; }
+.pf-detail .big img { max-width: 100%; max-height: 58vh; display: block; object-fit: contain; }
+.pf-ctl { position: absolute; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 6px; font: inherit; font-size: var(--cds-font-size-caption); color: var(--color-fg); background: color-mix(in srgb, var(--color-bg) 82%, transparent); border: 1px solid var(--color-border-line); cursor: pointer; backdrop-filter: blur(6px); }
+.pf-ctl:hover { background: var(--color-bg); }
+.pf-ctl:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.pf-ctl.arrow { top: 50%; transform: translateY(-50%); width: 2.5rem; height: 2.5rem; border-radius: 50%; font-size: 1.15rem; }
+.pf-ctl.prev { left: var(--cds-pad-sm); } .pf-ctl.next { right: var(--cds-pad-sm); }
+.pf-ctl.close { top: var(--cds-pad-sm); right: var(--cds-pad-sm); border-radius: 999px; padding: 6px 12px; }
+.pf-detail h2 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.pf-detail .info { display: flex; flex-direction: column; gap: var(--cds-gap-md); }
+.pf-detail .desc { margin: 0; font-size: var(--cds-font-size-body); max-width: 60ch; }
+.pf-stats { display: flex; gap: var(--cds-gap-lg); flex-wrap: wrap; }
+.pf-stats div { display: flex; flex-direction: column; }
+.pf-stats .n { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-title); line-height: 1.1; }
+.pf-stats .l { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pf-dl { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-body); }
+.pf-dh { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); text-transform: uppercase; letter-spacing: .04em; margin: 0; }
+.pf-dnav { display: flex; justify-content: space-between; gap: var(--cds-gap-sm); flex-wrap: wrap; }
+.pf-back { font: inherit; font-size: var(--cds-font-size-body); background: none; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-sm); color: var(--color-fg); cursor: pointer; }
+.pf-hit { cursor: pointer; }
+
+.pf-nav #tab-projeto { max-width: 18rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pf-viewer { display: flex; flex-direction: column; gap: var(--cds-gap-xs); min-width: 0; }
+.pf-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; background: rgba(0, 0, 0, .7); color: #fff; border-radius: 999px; padding: .6rem 1.2rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+.pf-play:hover, .pf-play:focus-visible { background: rgba(0, 0, 0, .85); outline: 2px solid #fff; }
+.pf-zoombtn { position: absolute; right: .6rem; bottom: .6rem; z-index: 2; font: inherit; font-size: var(--cds-font-size-caption); padding: .3rem .7rem; border-radius: 999px; border: 0; background: rgba(0, 0, 0, .65); color: #fff; cursor: pointer; }
+.pf-zoom { position: fixed; inset: 0; z-index: 1000; background: rgba(10, 10, 12, .94); overflow: auto; display: flex; }
+.pf-zoom[hidden] { display: none; }
+.pf-zoom .zi { margin: auto; padding: 3rem 1rem 1rem; }
+.pf-zoom img { display: block; max-width: none; height: auto; cursor: zoom-out; }
+.pf-zoom img.fit { max-width: calc(100vw - 2rem); max-height: calc(100vh - 4rem); cursor: zoom-in; }
+.pf-zoom .zbar { position: fixed; top: .6rem; right: .8rem; left: .8rem; display: flex; justify-content: space-between; gap: .5rem; color: #fff; font-size: var(--cds-font-size-caption); pointer-events: none; }
+.pf-zoom .zbar button { pointer-events: auto; font: inherit; padding: .3rem .8rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.4); background: rgba(0,0,0,.5); color: #fff; cursor: pointer; }
+.pf-viewer .cap { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); display: flex; justify-content: space-between; gap: var(--cds-gap-sm); }
+.pf-gal { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 8.5rem), 1fr)); gap: var(--cds-gap-sm); }
+.pf-thumb { all: unset; box-sizing: border-box; cursor: pointer; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.pf-thumb .im { aspect-ratio: 1 / 1; width: 100%; border-radius: var(--cds-radius); border: 1px solid var(--color-border-line); background: var(--color-panel); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.pf-thumb img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+.pf-thumb span { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.25; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.pf-thumb[aria-current=true] .im { border-color: var(--color-fg); box-shadow: 0 0 0 1px var(--color-fg); }
+.pf-thumb:focus-visible .im { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.pf-gal .sk { aspect-ratio: 1 / 1; border-radius: var(--cds-radius); }
+.pf-mx { width: 100%; }
+.pf-mx .cell { cursor: pointer; }
+.pf-mx .cell:hover rect { stroke: var(--color-fg); stroke-width: 1.5; }
+.pf-table tbody tr { cursor: pointer; }
+.pf-table tbody tr:hover td { background: var(--color-bg); }
+.pf-table th button[aria-sort=descending]::after { content: ' ↓'; }
+.pf-table th button[aria-sort=ascending]::after { content: ' ↑'; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+[data-dash-source-state=empty] { color: transparent; }
+</style>
+
+<div class="pf">
+  <header class="pf-head">
+    <h1 id="titulo">Design no Ministério da Saúde 2021–2026</h1>
+    <p class="pf-autor"><b>Leonardo Faria Almenara</b> · design da informação, visualização de dados, design editorial e sistemas de identidade visual</p>
+    <p class="pf-autor">Designer há mais de 15 anos · consultor via OPAS no Ministério da Saúde desde 2021</p>
+    <ul class="pf-traj">
+      <li><span>2021–2022</span>Núcleo de Comunicação da Secretaria de Atenção Primária à Saúde (NUCOM SAPS)</li>
+      <li><span>2022–atual</span>Departamento de Economia e Investimentos em Saúde (Desid)</li>
+    </ul>
+    <p class="pf-autor">Formação: Comunicação Social – Publicidade e Propaganda (UFES) · em curso: pós-graduações em Inteligência Artificial e Computacional (Departamento de Engenharia Elétrica, UFV) e em Comunicação e Saúde Pública (Grupo Hospitalar Conceição)</p>
+    <p class="pf-autor"><button type="button" class="pf-linkbtn" id="ir-eco">Da marca ao dado: o ecossistema visual do Desid →</button></p>
+    <div class="pf-tools-sw" aria-label="Ferramentas"><em>Design</em><span>Illustrator</span><span>Photoshop</span><span>InDesign</span><span>Premiere</span><span>After Effects (básico)</span><span>Bancos de imagem</span></div>
+    <div class="pf-tools-sw" aria-label="Ilustração"><em>Ilustração</em><span>Procreate</span><span>Photoshop</span><span>Illustrator</span><span>Desenho digital e manual</span></div>
+    <div class="pf-tools-sw" aria-label="Dados"><em>Dados</em><span>Desid em Dados (autoria própria): tokens, variáveis e componentes lidos como temas por R, Python, Plotly e Shiny</span></div>
+    <p id="resumo" class="dash-skeleton" data-source="resumo" data-field="frase" data-row="0">—</p>
+  </header>
+
+  <nav class="pf-nav" role="tablist" aria-label="Seções">
+    <button role="tab" id="tab-projetos" aria-selected="true" data-tab="projetos">Projetos</button>
+    <button role="tab" id="tab-projeto" aria-selected="false" data-tab="projeto" hidden></button>
+    <button role="tab" id="tab-geral" aria-selected="false" data-tab="geral">Visão geral</button>
+  </nav>
+
+  <div id="view-geral" class="pf" role="tabpanel" aria-labelledby="tab-geral" hidden>
+  <section class="pf-tiles" id="numeros">
+    <div class="pf-tile link" tabindex="0" role="button" data-goto="projetos"><span class="lab">Projetos →</span><span class="val dash-skeleton" data-source="resumo" data-field="projetos" data-row="0">—</span><span class="sub">fim de 2021 a out/2026</span></div>
+    <div class="pf-tile link" tabindex="0" role="button" data-tile="itens"><span class="lab">Itens produzidos →</span><span class="val dash-skeleton" data-source="resumo" data-field="pecas" data-row="0">—</span><span class="sub">peças distintas, sem duplicatas</span></div>
+    <div class="pf-tile link" tabindex="0" role="button" data-tile="eventos"><span class="lab">Identidades de eventos e cursos →</span><span class="val dash-skeleton" data-source="resumo" data-field="eventos" data-row="0">—</span><span class="sub">seminários, simpósios, capacitações</span></div>
+    <div class="pf-tile link" tabindex="0" role="button" data-tile="boletins"><span class="lab">Edições de boletim →</span><span class="val dash-skeleton" data-source="indicadores" data-field="valor" data-where="indicador=edicoes_boletim">—</span><span class="sub">diagramadas e revisadas</span></div>
+    <div class="pf-tile link" tabindex="0" role="button" data-tile="comp"><span class="lab">Componentes de sistema →</span><span class="val dash-skeleton" data-source="resumo" data-field="componentes" data-row="0">—</span><span class="sub">ícones, glifos e grafismos</span></div>
+    <div class="pf-tile link" tabindex="0" role="button" data-tile="fontes" id="tile-fontes"><span class="lab">Arquivos-fonte sob gestão direta →</span><span class="val dash-skeleton" data-source="indicadores" data-field="valor" data-where="indicador=arquivos_fonte_desid">—</span><span class="sub" id="fontes-prog" data-source="indicadores">—</span></div>
+  </section>
+
+  <section class="pf-card" id="eco">
+    <h2>Da marca ao dado: o ecossistema visual do Desid</h2>
+    <p class="note">Sete sistemas visuais próprios, criados desde o fim de 2022 e todos derivados da identidade do departamento. A ExpoECOS foi um projeto com começo e fim; os demais seguem em uso e evolução. Clique num sistema ou desdobramento para abrir o projeto.</p>
+    <div class="pf-eco" id="eco-mapa"></div>
+  </section>
+
+  <div class="pf-grid">
+    <section class="pf-card" id="linhas">
+      <h2 id="linhas-titulo">Onde está o trabalho</h2>
+      <p class="note">Itens produzidos por linha de trabalho. Clique numa linha para ver os projetos.</p>
+      <div class="pf-chart" id="ch-linhas" data-source="por_linha" style="min-height: 300px"></div>
+    </section>
+    <section class="pf-card" id="anos">
+      <h2 id="anos-titulo">Projetos iniciados por ano</h2>
+      <p class="note">Número de projetos por ano de início. 2026 vai até outubro.</p>
+      <div class="pf-chart" id="ch-anos" data-source="por_ano" style="min-height: 300px"></div>
+    </section>
+  </div>
+
+  <section class="pf-card" id="tempo">
+    <h2>Projetos ao longo do tempo</h2>
+    <p class="note">Cada círculo é um projeto, no ano em que começou; o traço mostra até quando seguiu em produção. O tamanho é o número de itens produzidos. Clique num círculo para abrir o projeto.</p>
+    <div class="pf-legend" id="leg-tempo"></div>
+    <div class="pf-chart" id="ch-tempo" data-source="projetos" style="min-height: 420px"></div>
+  </section>
+
+  <section class="pf-card" id="itens">
+    <h2 id="itens-titulo">Relação dos itens</h2>
+    <p class="note">Itens por linha de trabalho e ano de início do projeto. Clique numa célula para ver os projetos daquela linha e daquele ano.</p>
+    <div class="pf-chart pf-mx" id="ch-matriz" data-source="matriz" style="min-height: 260px"></div>
+    <div class="pf-tools"><input id="busca-itens" type="search" placeholder="Filtrar a tabela por projeto ou linha" aria-label="Filtrar tabela de itens"></div>
+    <div class="pf-tablebox">
+      <table class="pf-table" id="tb-itens" data-source="projetos" data-row-key="projeto">
+        <thead><tr>
+          <th data-field="projeto"><button type="button" data-k="projeto">Projeto</button></th>
+          <th data-field="linha" class="hide-sm"><button type="button" data-k="linha">Linha</button></th>
+          <th data-field="ano"><button type="button" data-k="ano">Ano</button></th>
+          <th data-field="pecas" class="num"><button type="button" data-k="pecas" aria-sort="descending">Itens</button></th>
+          <th data-field="componentes" class="num hide-sm"><button type="button" data-k="componentes">Componentes</button></th>
+          <th data-field="n_galeria" class="num hide-sm"><button type="button" data-k="n_galeria">Na galeria</button></th>
+          
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <p class="note" style="font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin:0">Contagens estimadas a partir das pastas de trabalho da SAPS e do Desid, depois de retirar duplicatas, versões anteriores, referências e arquivos de sistema. Itens são peças distintas e incluem algumas versões intermediárias.</p>
+  </div>
+
+  <div id="view-projetos" class="pf" role="tabpanel" aria-labelledby="tab-projetos">
+    <div id="lista" class="pf">
+      <div class="pf-tools">
+        <input id="busca" type="search" placeholder="Buscar projeto, peça ou descrição" aria-label="Buscar projeto">
+      </div>
+      <div class="pf-chips orig" id="origens" role="group" aria-label="Filtrar por origem"></div>
+      <div class="pf-chips" id="chips" role="group" aria-label="Filtrar por linha de trabalho"></div>
+      <p class="pf-count" id="contagem"></p>
+      <div class="pf-pgrid" id="grade" data-source="projetos"></div>
+      <section class="pf-prods" id="produtos" data-source="produtos" hidden></section>
+    </div>
+    <div id="detalhe" hidden></div>
+  </div>
+</div>
+
+<script src="capas.js"></script>
+<script>
+const nf = new Intl.NumberFormat('pt-BR');
+const brl = v => 'R$ ' + nf.format(v);
+const pct = new Intl.NumberFormat('pt-BR', {style: 'percent', maximumFractionDigits: 0});
+const ACC = () => dash.colors[0];
+const MUTED = 'var(--cds-chart-muted)';
+const CORDEM = ['Boletins de Conjuntura', 'Eventos e cursos', 'Publicações', 'Exposição e audiovisual', 'Papelaria institucional', 'Marca e identidades', 'Dataviz, infográficos e design system', 'Ilustração'];
+const ORDEM = ['Dataviz, infográficos e design system', 'Publicações', 'Ilustração', 'Eventos e cursos', 'Exposição e audiovisual', 'Papelaria institucional', 'Marca e identidades'];
+
+dash.calc('resumo', {
+  inputs: ['projetos'],
+  title: 'Resumo do portfólio',
+  description: 'Soma de projetos, itens e componentes, e número de identidades de eventos e cursos.',
+  fn: (projetos) => {
+    const n = v => Number(v) || 0;
+    const pecas = projetos.reduce((s, p) => s + n(p.pecas), 0);
+    const componentes = projetos.reduce((s, p) => s + n(p.componentes), 0);
+    const eventos = projetos.filter(p => p.linha === 'Eventos e cursos').length;
+    const linhas = new Set(projetos.map(p => p.linha)).size;
+    return [{projetos: projetos.length, pecas, componentes, eventos, linhas,
+      frase: `${projetos.length} projetos e ${pecas.toLocaleString('pt-BR')} itens produzidos para a SAPS (2021–2022) e para o Desid (desde o fim de 2022), em ${linhas} linhas de trabalho: dataviz, infográficos e design system, publicações (incluindo os boletins de conjuntura), ilustração, eventos, audiovisual, papelaria institucional e marca.`}];
+  }
+});
+
+dash.calc('por_linha', {
+  inputs: ['projetos'],
+  title: 'Itens por linha de trabalho',
+  description: 'Itens e projetos de cada linha de trabalho.',
+  fn: (projetos) => {
+    const m = new Map();
+    for (const p of projetos) {
+      const r = m.get(p.linha) || {linha: p.linha, total: 0, projetos: 0};
+      r.total += Number(p.pecas) || 0; r.projetos += 1; m.set(p.linha, r);
+    }
+    return [...m.values()].sort((a, b) => b.total - a.total);
+  }
+});
+
+dash.calc('por_ano', {
+  inputs: ['projetos'],
+  title: 'Projetos por ano de início',
+  description: 'Número de projetos iniciados em cada ano.',
+  fn: (projetos) => {
+    const m = new Map();
+    for (const p of projetos) m.set(String(p.ano), (m.get(String(p.ano)) || 0) + 1);
+    return [...m.entries()].map(([ano, projetos]) => ({ano, projetos})).sort((a, b) => a.ano.localeCompare(b.ano));
+  }
+});
+
+const LCOL = l => dash.colors[Math.max(0, CORDEM.indexOf(l)) % dash.colors.length];
+
+function setVal(sel, text) { document.querySelectorAll(sel).forEach(el => { el.textContent = text; el.classList.remove('dash-skeleton'); }); }
+function failed(el) {
+  el.innerHTML = '';
+  const d = document.createElement('div');
+  d.style.cssText = 'display:flex;align-items:center;justify-content:center;gap:.4rem;min-height:inherit;height:100%;color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)';
+  const dot = document.createElement('span'); dot.style.cssText = 'width:.375rem;height:.375rem;border-radius:50%;background:var(--color-bad)';
+  d.append(dot, document.createTextNode('Falha ao carregar')); el.append(d);
+}
+function legend(id, items) {
+  const el = document.getElementById(id); el.innerHTML = '';
+  for (const [c, t] of items) { const s = document.createElement('span'); const i = document.createElement('i'); i.style.background = c; s.append(i, document.createTextNode(t)); el.append(s); }
+}
+function tip(card) {
+  let t = card.querySelector('.pf-tip');
+  if (!t) { t = document.createElement('div'); t.className = 'pf-tip'; t.hidden = true; card.append(t); }
+  return {
+    show(ev, lines) {
+      t.innerHTML = ''; lines.forEach((l, i) => { const d = document.createElement('div'); if (i === 0) d.className = 't'; d.textContent = l; t.append(d); });
+      t.hidden = false;
+      const box = card.getBoundingClientRect();
+      let x = ev.clientX - box.left + 12, y = ev.clientY - box.top + 12;
+      const w = t.offsetWidth, h = t.offsetHeight;
+      if (x + w > box.width - 8) x = ev.clientX - box.left - w - 12;
+      if (y + h > box.height - 8) y = ev.clientY - box.top - h - 12;
+      t.style.left = Math.max(4, x) + 'px'; t.style.top = Math.max(4, y) + 'px';
+    },
+    hide() { t.hidden = true; }
+  };
+}
+
+function drawLinhas(rows) {
+  const el = document.getElementById('ch-linhas'); el.innerHTML = '';
+  const W = Math.max(280, el.clientWidth), rowH = 36, m = {t: 4, r: 56, b: 8};
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${m.t + m.b + rows.length * rowH}`);
+  const meas = svg.append('text').attr('font-size', 12).text('');
+  let lw = 0; rows.forEach(r => { meas.text(r.linha); lw = Math.max(lw, meas.node().getComputedTextLength()); }); meas.remove();
+  const left = Math.min(lw + 12, W * 0.45);
+  const x = d3.scaleLinear([0, d3.max(rows, r => r.total)], [left, W - m.r]);
+  const t = tip(el.closest('.pf-card'));
+  rows.forEach((r, i) => {
+    const y = m.t + i * rowH, bh = 18, by = y + (rowH - bh) / 2;
+    const g = svg.append('g');
+    g.append('text').attr('x', left - 8).attr('y', y + rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'end').attr('font-size', 12).attr('fill', 'var(--color-fg)').text(r.linha);
+    g.append('rect').attr('x', x(0)).attr('y', by).attr('height', bh).attr('width', Math.max(0, x(r.total) - x(0))).attr('rx', 3).attr('fill', LCOL(r.linha));
+    g.append('text').attr('x', x(r.total) + 6).attr('y', y + rowH / 2).attr('dy', '0.35em').attr('font-size', 12).attr('fill', 'var(--color-fg-muted)').text(nf.format(r.total));
+    g.append('rect').attr('x', 0).attr('y', y).attr('width', W).attr('height', rowH).attr('fill', 'transparent')
+      .on('mousemove', ev => t.show(ev, [r.linha, `${nf.format(r.total)} itens em ${r.projetos} projetos`, `Clique para ver os projetos`]))
+      .on('mouseleave', () => t.hide())
+      .attr('class', 'pf-hit').on('click', () => goProjetos(r.linha));
+  });
+}
+
+function drawAnos(rows) {
+  const el = document.getElementById('ch-anos'); el.innerHTML = '';
+  const W = Math.max(280, el.clientWidth), H = 300, m = {t: 28, r: 8, b: 36, l: 8};
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  const x = d3.scaleBand(rows.map(d => d.ano), [m.l, W - m.r]).padding(0.35);
+  const y = d3.scaleLinear([0, d3.max(rows, d => d.projetos) * 1.15], [H - m.b, m.t]);
+  const t = tip(el.closest('.pf-card'));
+  svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', 'var(--cds-chart-axis)');
+  rows.forEach(d => {
+    const bw = Math.min(x.bandwidth(), 56), bx = x(d.ano) + (x.bandwidth() - bw) / 2;
+    svg.append('rect').attr('x', bx).attr('width', bw).attr('y', y(d.projetos)).attr('height', y(0) - y(d.projetos)).attr('rx', 4).attr('fill', dash.colors[0])
+      .on('mousemove', ev => t.show(ev, [d.ano, `${d.projetos} projetos iniciados`])).on('mouseleave', () => t.hide());
+    svg.append('text').attr('x', bx + bw / 2).attr('y', y(d.projetos) - 8).attr('text-anchor', 'middle').attr('font-size', 12).attr('fill', 'var(--color-fg)').text(d.projetos);
+    svg.append('text').attr('x', bx + bw / 2).attr('y', H - m.b + 18).attr('text-anchor', 'middle').attr('font-size', 12).attr('fill', 'var(--color-fg-muted)').text(d.ano);
+  });
+}
+
+const periodo = d => (d.ano_fim && d.ano_fim !== String(d.ano)) ? `${d.ano}–${d.ano_fim}` : String(d.ano);
+function drawTempo(rows) {
+  const el = document.getElementById('ch-tempo'); el.innerHTML = '';
+  const W = Math.max(300, el.clientWidth);
+  const linhas = ORDEM.filter(l => rows.some(r => r.linha === l));
+  const rowH = 64, m = {t: 8, b: 28};
+  const H = m.t + m.b + linhas.length * rowH;
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  const meas = svg.append('text').attr('font-size', 12); let lw = 0;
+  linhas.forEach(l => { meas.text(l); lw = Math.max(lw, meas.node().getComputedTextLength()); }); meas.remove();
+  const narrow = W < 560, left = narrow ? 8 : lw + 16;
+  const anos = d3.range(2021, 2027);
+  const x = d3.scaleBand(anos, [left, W - 8]).padding(0.04);
+  const yc = l => m.t + linhas.indexOf(l) * rowH + rowH / 2 + (narrow ? 6 : 0);
+  const r = d3.scaleSqrt([0, d3.max(rows, d => Number(d.pecas))], [0, Math.min(24, x.bandwidth() / 4)]);
+  linhas.forEach((l, i) => {
+    const yy = m.t + i * rowH;
+    if (i > 0) svg.append('line').attr('x1', 0).attr('x2', W).attr('y1', yy).attr('y2', yy).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('text').attr('x', narrow ? 8 : left - 10).attr('y', narrow ? yy + 12 : yy + rowH / 2).attr('dy', narrow ? 0 : '0.35em').attr('text-anchor', narrow ? 'start' : 'end').attr('font-size', narrow ? 11 : 12).attr('fill', 'var(--color-fg-muted)').text(l);
+  });
+  anos.forEach(a => svg.append('text').attr('x', x(a) + x.bandwidth() / 2).attr('y', H - 8).attr('text-anchor', 'middle').attr('font-size', 12).attr('fill', 'var(--color-fg-muted)').text(a));
+  const nodes = rows.filter(d => linhas.includes(d.linha)).map(d => ({d, rad: Math.max(3, r(Number(d.pecas))), tx: x(Number(d.ano)) + x.bandwidth() / 2, ty: yc(d.linha)}));
+  nodes.forEach(n => { n.x = n.tx; n.y = n.ty; });
+  const sim = d3.forceSimulation(nodes).force('x', d3.forceX(n => n.tx).strength(0.12)).force('y', d3.forceY(n => n.ty).strength(0.5)).force('c', d3.forceCollide(n => n.rad + 1.5)).stop();
+  for (let i = 0; i < 200; i++) sim.tick();
+  const t = tip(el.closest('.pf-card'));
+  svg.append('g').selectAll('line').data(nodes.filter(n => n.d.ano_fim && Number(n.d.ano_fim) > Number(n.d.ano))).join('line')
+    .attr('x1', n => n.x).attr('x2', n => x(Number(n.d.ano_fim)) + x.bandwidth() / 2).attr('y1', n => n.y).attr('y2', n => n.y)
+    .attr('stroke', n => LCOL(n.d.linha)).attr('stroke-opacity', 0.45).attr('stroke-width', 2).attr('stroke-linecap', 'round');
+  svg.append('g').selectAll('circle').data(nodes).join('circle')
+    .attr('cx', n => n.x).attr('cy', n => n.y).attr('r', n => n.rad)
+    .attr('fill', n => LCOL(n.d.linha)).attr('fill-opacity', 0.85)
+    .attr('stroke', 'var(--color-panel)').attr('stroke-width', 1)
+    .on('mousemove', (ev, n) => t.show(ev, [`${periodo(n.d)} · ${n.d.linha}`, n.d.projeto, `${nf.format(Number(n.d.pecas))} itens`, 'Clique para abrir']))
+    .on('mouseleave', () => t.hide())
+    .attr('class', 'pf-hit').on('click', (ev, n) => openProjeto(n.d.projeto));
+}
+
+
+const state = {ano: '', special: '', linha: '', q: '', origem: '', open: null, view: 'projetos', sel: 0};
+const ORIGENS = [['', 'Todos'], ['saps', 'SAPS · 2021–2022'], ['desid', 'Desid · 2022–2026'], ['opas', 'Produtos OPAS']];
+const ORIG = {saps: d => /SAPS/.test(d.origem || ''), desid: d => d.origem !== 'SAPS', opas: d => false};
+const produtosRows = () => { const P = dash.data('produtos'); return P.status === 'ok' ? P.data : []; };
+const daOrigem = d => !state.origem || ORIG[state.origem](d);
+const CAPAS = () => window.PF_CAPAS || {};
+const slug = t => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+let projetosCache = [];
+
+const ECO = {
+  mat: {nome: 'Identidade visual do Desid', sub: 'Logotipo, paleta, tipografia e grafismos: a matriz de que os demais sistemas derivam.', l: 'Marca e identidades'},
+  ramos: [
+    {t: 'Universo Econópolis', l: 'Ilustração', sis: [
+      {nome: 'Econópolis', sub: 'Universo narrativo e de personagens da Economia da Saúde, contexto da mostra e de outros produtos'},
+      {nome: 'ExpoECOS', sub: 'Sistema expográfico da mostra dos 20 anos, dentro do universo Econópolis (2023, projeto concluído)', l: 'Exposição e audiovisual'}],
+     der: [['Catálogo da mostra', 'Catálogo ExpoECOS'], ['Tirinhas', 'Econópolis'], ['Boletim interno', 'Boletim Desid / Conexão Desid'], ['Base das animações da trilha formativa (UFRN)', 'Personagens para vídeos (UFRN)']]},
+    {t: 'Marcas e comunicação', l: 'Marca e identidades', sis: [
+      {nome: 'Rede ECOS', sub: 'Identidade, portal, campanha e newsletter da rede'}],
+     der: [['Marcas das ferramentas: BPS, PNGC, SIOPS', 'Logos das ferramentas Desid'], ['Identidades de eventos e cursos', null, 'Eventos e cursos'], ['Campanha Crie um NES', 'Campanha Crie um NES'], ['Papelaria e sinalização', 'Papelaria e sinalização'], ['Modelos de apresentação', 'Modelos de apresentação (PPT)']]},
+    {t: 'Publicações', l: 'Publicações', sis: [
+      {nome: 'Boletins de Conjuntura', sub: 'Mais de 100 edições em quatro séries, diagramadas desde a primeira'},
+      {nome: 'SHA BR', p: 'Manual Metodológico SHA Brasil', sub: 'Das publicações aos eventos'}],
+     der: [['Manual metodológico', 'Manual Metodológico SHA Brasil'], ['SHA BR 2026', 'SHA BR 2026'], ['Workshop de institucionalização', 'SHA no Brasil – OCDE'], ['Notas Informativas', 'Notas Informativas']]},
+    {t: 'Dados', l: 'Dataviz, infográficos e design system', sis: [
+      {nome: 'Desid em Dados', sub: 'Design system de código: tokens, variáveis e componentes lidos como temas por R, Python, Plotly e Shiny'}],
+     der: [['Infográficos e diagramas', 'Infográficos e diagramas'], ['Painéis da TV de monitoramento', 'Painéis da TV de monitoramento']]}
+  ]
+};
+function drawEco() {
+  const el = document.getElementById('eco-mapa'); if (!el || el.dataset.ok || !projetosCache.length) return;
+  const tem = n => projetosCache.some(x => x.projeto === n);
+  const sis = (s, l, tag) => {
+    const p = s.p || s.nome, b = document.createElement('button'); b.type = 'button'; b.className = 'pf-eco-sis'; b.style.setProperty('--c', LCOL(s.l || l));
+    const k = document.createElement('span'); k.className = 'k'; k.textContent = tag;
+    const n = document.createElement('b'); n.textContent = s.nome;
+    const d = document.createElement('small'); d.textContent = s.sub;
+    b.append(k, n, d);
+    if (tem(p)) b.addEventListener('click', () => openProjeto(p)); else b.disabled = true;
+    return b;
+  };
+  const m = sis(ECO.mat, ECO.mat.l, 'Matriz'); m.classList.add('pf-eco-mat'); m.style.textAlign = 'center';
+  const ramos = document.createElement('div'); ramos.className = 'pf-eco-ramos';
+  ECO.ramos.forEach(r => {
+    const c = document.createElement('div'); c.className = 'pf-eco-ramo';
+    const h = document.createElement('h3'); h.textContent = r.t; c.append(h);
+    r.sis.forEach(s => c.append(sis(s, r.l, 'Sistema')));
+    const dl = document.createElement('div'); dl.className = 'pf-eco-der';
+    r.der.forEach(([lab, p, linha]) => {
+      let x;
+      if (p && tem(p)) { x = document.createElement('button'); x.type = 'button'; x.addEventListener('click', () => openProjeto(p)); }
+      else if (linha) { x = document.createElement('button'); x.type = 'button'; x.addEventListener('click', () => { goProjetos(linha); state.origem = 'desid'; drawProjetos(); }); }
+      else x = document.createElement('span');
+      x.textContent = lab + (x.tagName === 'BUTTON' ? ' →' : ''); dl.append(x);
+    });
+    c.append(dl); ramos.append(c);
+  });
+  el.append(m, ramos); el.dataset.ok = '1';
+}
+document.getElementById('ir-eco').addEventListener('click', () => { showTab('geral'); requestAnimationFrame(() => document.getElementById('eco').scrollIntoView({block: 'start', behavior: 'smooth'})); });
+function showTab(name) {
+  state.view = name;
+  const tp = document.getElementById('tab-projeto');
+  tp.hidden = !(state.open && name === 'projeto'); if (state.open) { tp.textContent = state.open; tp.title = state.open; }
+  document.querySelectorAll('.pf-nav button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
+  document.getElementById('view-geral').hidden = name !== 'geral';
+  document.getElementById('view-projetos').hidden = name === 'geral';
+  document.getElementById('lista').hidden = name !== 'projetos';
+  document.getElementById('detalhe').hidden = name !== 'projeto';
+  if (name === 'geral') { drawEco(); requestAnimationFrame(drawCharts); }
+}
+function goProjetos(linha, special) {
+  if (linha !== undefined) { state.linha = linha; state.origem = ''; }
+  state.special = special || '';
+  showTab('projetos'); drawProjetos(); dash.setLink('lista');
+  document.querySelector('.pf-nav').scrollIntoView({block: 'start'});
+}
+function openProjeto(nome) {
+  if (state.open !== nome) { state.sel = 0; state.grid = false; }
+  state.open = nome; showTab('projeto'); drawDetalhe(projetosCache);
+  dash.setLink('p-' + slug(nome));
+  document.querySelector('.pf-nav').scrollIntoView({block: 'start'});
+}
+function cover(d, cls) {
+  const box = document.createElement('div'); box.className = cls;
+  const src = CAPAS()[d.projeto];
+  if (src) { const im = document.createElement('img'); im.src = src; im.alt = 'Capa de ' + d.projeto; im.loading = 'lazy'; box.append(im); }
+  else box.append(placeholder(d));
+  return box;
+}
+function placeholder(d) {
+  const ph = document.createElement('div'); ph.className = 'pf-ph';
+  const r = document.createElement('i'); r.className = 'r'; r.style.background = LCOL(d.linha);
+  const k = document.createElement('span'); k.className = 'k'; k.textContent = d.linha;
+  const t = document.createElement('span'); t.className = 't'; t.textContent = d.projeto;
+  ph.append(r, k, t); return ph;
+}
+function pill(d) {
+  const p = document.createElement('span');
+  if (/parceiro/i.test(d.origem || '')) { p.className = 'pf-pill'; p.textContent = 'Parceiro externo'; }
+  else if (d.origem === 'SAPS') { p.className = 'pf-pill'; p.textContent = 'SAPS · 2021–2022'; }
+  else if (/SAPS/.test(d.origem || '')) { p.className = 'pf-pill'; p.textContent = 'Desid e SAPS'; }
+  return p;
+}
+const SPECIAL = {
+  ano: {get label() { return 'Iniciados em ' + state.ano; }, f: d => true, s: (a, b) => Number(b.pecas) - Number(a.pecas)},
+  itens: {label: 'Ordenados por itens produzidos', f: d => true, s: (a, b) => Number(b.pecas) - Number(a.pecas)},
+  fontes: {label: 'Projetos por arquivos-fonte sob gestão direta', f: d => Number(d.arquivos_fonte) > 0, s: (a, b) => Number(b.arquivos_fonte) - Number(a.arquivos_fonte)},
+  comp: {label: 'Projetos com componentes de sistema', f: d => Number(d.componentes) > 0, s: (a, b) => Number(b.componentes) - Number(a.componentes)},
+  sem: {label: 'Projetos sem produto contratado', f: d => d.produto_opas !== 'sim', s: (a, b) => Number(b.pecas) - Number(a.pecas)}
+};
+function filtered(rows) {
+  const q = state.q.toLowerCase(); const sp = SPECIAL[state.special];
+  return rows.filter(d => daOrigem(d) && (!state.linha || d.linha === state.linha) && (!sp || sp.f(d)) && (state.special !== 'ano' || String(d.ano) === state.ano) && (!q || (d.projeto + ' ' + d.descricao + ' ' + d.desdobramentos).toLowerCase().includes(q)))
+    .slice().sort(sp ? sp.s : (a, b) => Number(b.ano) - Number(a.ano) || Number(b.pecas) - Number(a.pecas));
+}
+function openZoom(it) {
+  let z = document.getElementById('pf-zoom');
+  if (!z) {
+    z = document.createElement('div'); z.id = 'pf-zoom'; z.className = 'pf-zoom'; z.setAttribute('role', 'dialog'); z.setAttribute('aria-modal', 'true');
+    const bar = document.createElement('div'); bar.className = 'zbar';
+    const cap = document.createElement('span'); cap.className = 'zcap';
+    const btns = document.createElement('span'); btns.style.display = 'flex'; btns.style.gap = '.5rem';
+    const fit = document.createElement('button'); fit.type = 'button'; fit.className = 'zfit';
+    const cl = document.createElement('button'); cl.type = 'button'; cl.textContent = '✕ Fechar'; cl.addEventListener('click', () => { z.hidden = true; });
+    btns.append(fit, cl); bar.append(cap, btns);
+    const wrap = document.createElement('div'); wrap.className = 'zi'; const img = document.createElement('img'); wrap.append(img);
+    const toggle = () => { img.classList.toggle('fit'); fit.textContent = img.classList.contains('fit') ? 'Tamanho real' : 'Ajustar à tela'; };
+    img.addEventListener('click', toggle); fit.addEventListener('click', toggle);
+    z.addEventListener('click', e => { if (e.target === z) z.hidden = true; });
+    z.append(bar, wrap); (document.getElementById('view-projetos') || document.body).append(z);
+  }
+  const img = z.querySelector('img'); img.src = it.img; img.alt = it.legenda; img.classList.remove('fit');
+  z.querySelector('.zfit').textContent = 'Ajustar à tela'; z.querySelector('.zcap').textContent = it.legenda;
+  z.hidden = false; z.scrollTo(0, 0);
+}
+document.addEventListener('keydown', e => { const z = document.getElementById('pf-zoom'); if (e.key === 'Escape' && z && !z.hidden) { z.hidden = true; e.stopPropagation(); } }, true);
+let prodSel = '';
+function drawProdutos() {
+  const sec = document.getElementById('produtos'); sec.innerHTML = '';
+  const o = state.origem, q = state.q.toLowerCase();
+  const show = o === 'opas' || (!state.linha && !state.special);
+  const all = produtosRows();
+  const its = all.filter(p => (o === 'saps' ? p.origem === 'SAPS' : o === 'desid' ? p.origem === 'Desid' : true) && (!q || (p.titulo + ' ' + p.descricao).toLowerCase().includes(q)));
+  sec.hidden = !show || !its.length; if (sec.hidden) return;
+  if (!its.some(p => p.id === prodSel)) prodSel = '';
+  const h = document.createElement('h3'); h.textContent = 'Produtos OPAS';
+  const nt = document.createElement('p'); nt.className = 'note'; nt.textContent = `${its.length} relatórios técnicos entregues como consultor via OPAS, organizados pelo ano de entrega. Clique num produto para ver o resumo.`;
+  const board = document.createElement('div'); board.className = 'pf-pboard';
+  const det = document.createElement('div'); det.className = 'pf-pdet'; det.setAttribute('aria-live', 'polite');
+  const proj = p => projetosCache.find(x => x.projeto === p.projeto);
+  const anos = [...new Set(its.map(p => p.ano))].sort();
+  board.style.setProperty('--n', anos.length);
+  const toks = [];
+  const showDet = () => {
+    toks.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id === prodSel)));
+    det.innerHTML = ''; det.hidden = !prodSel; if (!prodSel) return;
+    const p = its.find(x => x.id === prodSel), pr = proj(p);
+    const m = document.createElement('div'); m.className = 'm';
+    m.textContent = `Produto ${p.produto} · ciclo ${p.ciclo} · ${p.origem === 'SAPS' ? 'NUCOM SAPS' : 'Desid'} · entregue em ${p.ano}`;
+    const b = document.createElement('b'); b.textContent = p.titulo;
+    const d = document.createElement('p'); d.textContent = p.descricao;
+    const act = document.createElement('div'); act.className = 'act';
+    if (pr) { const bt = document.createElement('button'); bt.className = 'pf-back'; bt.type = 'button'; bt.textContent = 'Ver o projeto ' + p.projeto + ' →'; bt.addEventListener('click', () => openProjeto(p.projeto)); act.append(bt); }
+    const x = document.createElement('button'); x.className = 'pf-back'; x.type = 'button'; x.textContent = 'Fechar'; x.addEventListener('click', () => { prodSel = ''; showDet(); });
+    act.append(x);
+    if (pr) det.style.setProperty('--c', LCOL(pr.linha)); else det.style.removeProperty('--c');
+    det.append(m, b, d, act);
+  };
+  anos.forEach(a => {
+    const col = document.createElement('div'); col.className = 'pf-pcol';
+    const ps = its.filter(p => p.ano === a);
+    const hd = document.createElement('div'); hd.className = 'pf-pyr'; hd.innerHTML = `<span>${a}</span><small>${ps.length}</small>`;
+    const lst = document.createElement('div'); lst.className = 'pf-ptoks';
+    ps.forEach(p => {
+      const pr = proj(p);
+      const bt = document.createElement('button'); bt.type = 'button'; bt.className = 'pf-ptok'; bt.dataset.id = p.id;
+      if (pr) bt.style.setProperty('--c', LCOL(pr.linha));
+      const k = document.createElement('span'); k.className = 'k'; k.textContent = `${p.origem === 'SAPS' ? 'SAPS' : 'Desid'} · P${p.produto}`;
+      const ti = document.createElement('span'); ti.className = 't'; ti.textContent = p.titulo;
+      bt.title = p.titulo; bt.append(k, ti);
+      bt.addEventListener('click', () => { prodSel = prodSel === p.id ? '' : p.id; showDet(); if (prodSel) det.scrollIntoView({block: 'nearest', behavior: 'smooth'}); });
+      toks.push(bt); lst.append(bt);
+    });
+    col.append(hd, lst); board.append(col);
+  });
+  sec.append(h, nt, board, det); showDet();
+}
+function drawProjetos() {
+  const rows = projetosCache; if (!rows.length) return;
+  const origens = document.getElementById('origens'); origens.innerHTML = '';
+  ORIGENS.forEach(([k, nome]) => {
+    const n = k === 'opas' ? produtosRows().length : rows.filter(r => !k || ORIG[k](r)).length; if (k && !n) return;
+    const c = document.createElement('button'); c.className = 'pf-chip'; c.setAttribute('aria-pressed', String(state.origem === k));
+    c.textContent = nome + ' · ' + n;
+    c.addEventListener('click', () => { state.origem = k; if (state.linha && !rows.some(r => r.linha === state.linha && daOrigem(r))) state.linha = ''; drawProjetos(); }); origens.append(c);
+  });
+  const sub = rows.filter(daOrigem);
+  if (state.linha && !sub.some(r => r.linha === state.linha)) state.linha = '';
+  const chips = document.getElementById('chips'); chips.innerHTML = '';
+  [''].concat(ORDEM.filter(l => sub.some(r => r.linha === l))).forEach(l => {
+    const c = document.createElement('button'); c.className = 'pf-chip'; c.setAttribute('aria-pressed', String(state.linha === l));
+    const n = sub.filter(r => !l || r.linha === l).length;
+    c.textContent = (l || 'Todas') + ' · ' + n; c.addEventListener('click', () => { state.linha = l; state.special = ''; drawProjetos(); }); chips.append(c);
+  });
+  const list = filtered(rows);
+  const sp = SPECIAL[state.special]; let spc = document.getElementById('special'); 
+  if (!spc) { spc = document.createElement('button'); spc.id = 'special'; spc.className = 'pf-chip'; spc.setAttribute('aria-pressed', 'true'); spc.addEventListener('click', () => { state.special = ''; drawProjetos(); }); chips.after(spc); }
+  spc.hidden = !sp; if (sp) spc.textContent = sp.label + '  ✕';
+  const soOpas = state.origem === 'opas';
+  chips.hidden = soOpas; if (soOpas) spc.hidden = true;
+  document.getElementById('grade').hidden = soOpas;
+  drawProdutos();
+  document.getElementById('contagem').textContent = soOpas ? `${produtosRows().length} produtos OPAS` : `${list.length} ${list.length === 1 ? 'projeto' : 'projetos'}, ${nf.format(list.reduce((s, d) => s + Number(d.pecas), 0))} itens`;
+  const g = document.getElementById('grade'); g.innerHTML = '';
+  const feat = d => d.destaque === 'sim';
+  const grouped = !state.linha && !state.q && !state.special;
+  const seq = [];
+  if (grouped) {
+    ORDEM.forEach(l => {
+      const its = list.filter(d => d.linha === l); if (!its.length) return;
+      seq.push({head: l, n: its.length, itens: its.reduce((s, d) => s + Number(d.pecas), 0)});
+      its.filter(feat).concat(its.filter(d => !feat(d))).forEach(d => seq.push(d));
+    });
+  } else list.forEach(d => seq.push(d));
+  for (const d of seq) {
+    if (d.head) {
+      const h = document.createElement('div'); h.className = 'pf-ghead';
+      const i = document.createElement('i'); i.style.background = LCOL(d.head);
+      const b = document.createElement('b'); b.textContent = d.head;
+      const s = document.createElement('span'); s.textContent = `${d.n} ${d.n === 1 ? 'projeto' : 'projetos'} · ${nf.format(d.itens)} itens`;
+      h.append(i, b, s); g.append(h); continue;
+    }
+    const c = document.createElement('button'); c.className = 'pf-pcard' + (feat(d) && grouped ? ' feat' : ''); c.type = 'button'; c.setAttribute('aria-label', d.projeto);
+    c.append(cover(d, 'pf-cover'));
+    const body = document.createElement('div'); body.className = 'pf-pbody';
+    const t = document.createElement('b'); t.textContent = d.projeto;
+    const m = document.createElement('div'); m.className = 'pf-meta'; m.append(document.createTextNode(`${periodo(d)} · ${d.linha}`));
+    const m2 = document.createElement('div'); m2.className = 'pf-meta';
+    const extra = (state.special === 'fontes' && Number(d.arquivos_fonte) > 0 ? ` · ${d.arquivos_fonte} arquivos-fonte` : '') + (Number(d.n_galeria) > 0 ? ` · ${d.n_galeria} peças na galeria` : '');
+    m2.append(document.createTextNode(`${nf.format(Number(d.pecas))} itens${extra}`), pill(d));
+    if (feat(d)) { const ds = document.createElement('span'); ds.className = 'pf-pill dest'; ds.textContent = 'Destaque'; m2.append(ds); }
+    if (videoDe(d)) { const vs = document.createElement('span'); vs.className = 'pf-pill'; vs.textContent = '▶ Vídeo'; m2.append(vs); }
+    body.append(t, m, m2); c.append(body);
+    c.addEventListener('click', () => openProjeto(d.projeto)); g.append(c);
+  }
+}
+const videoDe = d => /^https:\/\/(youtu\.be|www\.youtube\.com)\//.test(String(d.video || '')) ? String(d.video) : '';
+function linkVideo(d, cls, txt) { const a = document.createElement('a'); a.className = cls; a.href = videoDe(d); a.target = '_blank'; a.rel = 'noopener'; a.textContent = txt; return a; }
+function galeriaDe(d) {
+  const items = (d.capa_ref ? [] : [{legenda: 'Capa', img: CAPAS()[d.projeto]}]).filter(x => x.img);
+  let status = 'ok';
+  if (d.galeria) {
+    const gs = String(d.galeria).split('|').filter(Boolean).map(id => dash.data(id));
+    status = gs.find(G => G.status !== 'ok')?.status || 'ok';
+    const base = d.origem === 'SAPS' ? 'SAPS' : 'Desid';
+    const okOrig = r => !(state.origem === 'saps' || state.origem === 'desid') || (r.origem || base) === (state.origem === 'saps' ? 'SAPS' : 'Desid');
+    if (status === 'ok') gs.flatMap(G => G.data).filter(r => r.projeto === d.projeto && okOrig(r)).sort((a, b) => Number(a.ordem) - Number(b.ordem)).forEach(r => items.push({legenda: r.legenda, img: r.img}));
+  }
+  return {items, status};
+}
+function drawDetalhe(rows) {
+  const det = document.getElementById('detalhe'); det.innerHTML = '';
+  const list = filtered(rows); const all = list.some(d => d.projeto === state.open) ? list : rows;
+  const i = all.findIndex(d => d.projeto === state.open); const d = all[i];
+  if (!d) { state.open = null; showTab('projetos'); drawProjetos(); return; }
+  det.className = 'pf';
+  const nav = document.createElement('div'); nav.className = 'pf-dnav';
+  const back = document.createElement('button'); back.className = 'pf-back'; back.textContent = '← Todos os projetos'; back.addEventListener('click', () => goProjetos());
+  const pn = document.createElement('div'); pn.style.cssText = 'display:flex;gap:var(--cds-gap-xs)';
+  const mk = (txt, j) => { const b = document.createElement('button'); b.className = 'pf-back'; b.textContent = txt; b.disabled = j < 0 || j >= all.length; b.addEventListener('click', () => openProjeto(all[j].projeto)); return b; };
+  pn.append(mk('← Anterior', i - 1), mk('Próximo →', i + 1)); nav.append(back, pn);
+
+  const {items, status} = galeriaDe(d);
+  if (state.sel >= items.length) state.sel = 0;
+  if (state.grid && items.length > 1) {
+    const head = document.createElement('div'); head.className = 'pf-dnav';
+    const h2 = document.createElement('h2'); h2.style.cssText = 'margin:0;font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title)'; h2.textContent = d.projeto;
+    const cl = document.createElement('button'); cl.className = 'pf-back'; cl.textContent = '✕ Fechar galeria'; cl.addEventListener('click', () => { state.grid = false; drawDetalhe(projetosCache); });
+    head.append(h2, cl);
+    const gg = document.createElement('div'); gg.className = 'pf-biggrid';
+    items.forEach((it, k) => {
+      const t = document.createElement('button'); t.className = 'pf-thumb'; t.type = 'button'; t.setAttribute('aria-label', 'Abrir ' + it.legenda);
+      const box = document.createElement('div'); box.className = 'im'; const im = document.createElement('img'); im.src = it.img; im.alt = ''; im.loading = 'lazy'; box.append(im);
+      const lb = document.createElement('span'); lb.textContent = it.legenda; t.append(box, lb);
+      t.addEventListener('click', () => { state.sel = k; state.grid = false; drawDetalhe(projetosCache); document.querySelector('.pf-nav').scrollIntoView({block: 'start'}); });
+      gg.append(t);
+    });
+    det.append(nav, head, gg); return;
+  }
+  const wrap = document.createElement('div'); wrap.className = 'pf-detail'; wrap.id = 'p-' + slug(d.projeto);
+  const viewer = document.createElement('div'); viewer.className = 'pf-viewer';
+  const big = document.createElement('div'); big.className = 'big';
+  const cur = items[state.sel];
+  if (cur) { const im = document.createElement('img'); im.src = cur.img; im.alt = cur.legenda + ' — ' + d.projeto; im.style.cursor = 'zoom-in'; im.addEventListener('click', () => openZoom(cur)); big.append(im); big.style.position = 'relative'; const zb = document.createElement('button'); zb.type = 'button'; zb.className = 'pf-zoombtn'; zb.textContent = '⤢ Ampliar'; zb.addEventListener('click', () => openZoom(cur)); big.append(zb); }
+  if (videoDe(d)) { big.style.position = 'relative'; big.append(linkVideo(d, 'pf-play', '▶ Assistir à animação')); }
+  const toGal = () => { const g = document.getElementById('g-' + slug(d.projeto)); if (g) g.scrollIntoView({block: 'start', behavior: 'smooth'}); };
+  if (items.length > 1) {
+    const ctl = (cls, txt, label, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'pf-ctl ' + cls; b.textContent = txt; b.setAttribute('aria-label', label); b.addEventListener('click', fn); big.append(b); return b; };
+    ctl('arrow prev', '‹', 'Peça anterior', () => { state.sel = (state.sel - 1 + items.length) % items.length; drawDetalhe(projetosCache); });
+    ctl('arrow next', '›', 'Próxima peça', () => { state.sel = (state.sel + 1) % items.length; drawDetalhe(projetosCache); });
+    ctl('close', '▦ Ver todas as peças', 'Abrir a galeria ampliada', () => { state.grid = true; drawDetalhe(projetosCache); document.querySelector('.pf-nav').scrollIntoView({block: 'start'}); });
+  }
+  else big.append(placeholder(d));
+  const cap = document.createElement('div'); cap.className = 'cap';
+  const cl = document.createElement('span'); cl.textContent = cur ? cur.legenda : '';
+  const cn = document.createElement('span'); cn.textContent = items.length > 1 ? `${state.sel + 1} de ${items.length}` : '';
+  cap.append(cl, cn); viewer.append(big, cap);
+  wrap.append(viewer);
+
+  const info = document.createElement('div'); info.className = 'info';
+  const h = document.createElement('h2'); h.textContent = d.projeto;
+  const meta = document.createElement('div'); meta.className = 'pf-meta'; meta.append(document.createTextNode(`${d.linha} · ${d.ano_fim ? periodo(d) : 'desde ' + d.ano} · ${d.origem}`), pill(d));
+  const ds = document.createElement('p'); ds.className = 'desc'; ds.textContent = d.descricao;
+  const st = document.createElement('div'); st.className = 'pf-stats';
+  [[nf.format(Number(d.pecas)), 'itens produzidos'], [nf.format(Number(d.componentes)), 'componentes de sistema'], [nf.format(Number(d.arquivos_fonte) || 0), 'arquivos-fonte sob gestão']].forEach(([n, l]) => {
+    if (l.startsWith('componentes') && Number(d.componentes) === 0) return;
+    if (l.startsWith('arquivos') && !(Number(d.arquivos_fonte) > 0)) return;
+    const x = document.createElement('div'); const a = document.createElement('span'); a.className = 'n'; a.textContent = n; const b = document.createElement('span'); b.className = 'l'; b.textContent = l; x.append(a, b); st.append(x);
+  });
+  const dh = document.createElement('p'); dh.className = 'pf-dh'; dh.textContent = 'Desdobramentos';
+  const ul = document.createElement('ul'); ul.className = 'pf-dl';
+  String(d.desdobramentos || '').split('|').filter(Boolean).forEach(x => { const li = document.createElement('li'); li.textContent = x.trim(); ul.append(li); });
+  info.append(h, meta, ds);
+  if (videoDe(d)) { const v = linkVideo(d, 'pf-back', '▶ Assistir no YouTube'); v.style.alignSelf = 'flex-start'; v.style.textDecoration = 'none'; info.append(v); }
+  String(d.links || '').split('|').filter(Boolean).forEach(nome => {
+    if (!projetosCache.some(x => x.projeto === nome)) return;
+    const b = document.createElement('button'); b.className = 'pf-back'; b.style.alignSelf = 'flex-start'; b.textContent = 'Ver o projeto ' + nome + ' →';
+    b.addEventListener('click', () => openProjeto(nome)); info.append(b);
+  });
+  info.append(st, dh, ul);
+  const rel = produtosRows().filter(p => p.projeto === d.projeto);
+  if (rel.length) { const ph = document.createElement('p'); ph.className = 'pf-dh'; ph.textContent = 'Produtos OPAS relacionados'; const pl = document.createElement('ul'); pl.className = 'pf-dl'; pl.dataset.source = 'produtos'; rel.forEach(p => { const li = document.createElement('li'); li.textContent = 'Produto ' + p.produto + ' · ' + p.ano + ' (' + p.origem + ', ciclo ' + p.ciclo + '): ' + p.titulo; pl.append(li); }); info.append(ph, pl); }
+  if (d.estrategia) { const eh = document.createElement('p'); eh.className = 'pf-dh'; eh.textContent = 'Estratégia'; const ep = document.createElement('p'); ep.className = 'desc'; ep.textContent = d.estrategia; info.append(eh, ep); }
+  wrap.append(info);
+
+  const gsec = document.createElement('section'); gsec.className = 'pf'; gsec.style.gap = 'var(--cds-gap-sm)'; gsec.id = 'g-' + slug(d.projeto); gsec.style.scrollMarginTop = '1rem';
+  const gh = document.createElement('p'); gh.className = 'pf-dh'; gh.textContent = 'Peças';
+  const gal = document.createElement('div'); gal.className = 'pf-gal'; if (d.galeria) gal.dataset.source = String(d.galeria).split('|').join(' ');
+  items.forEach((it, k) => {
+    const t = document.createElement('button'); t.className = 'pf-thumb'; t.type = 'button'; t.setAttribute('aria-current', String(k === state.sel)); t.setAttribute('aria-label', it.legenda);
+    const box = document.createElement('div'); box.className = 'im'; const im = document.createElement('img'); im.src = it.img; im.alt = ''; im.loading = 'lazy'; box.append(im);
+    const lb = document.createElement('span'); lb.textContent = it.legenda; t.append(box, lb);
+    t.addEventListener('click', () => { state.sel = k; drawDetalhe(projetosCache); document.getElementById('p-' + slug(d.projeto)).scrollIntoView({block: 'nearest'}); });
+    gal.append(t);
+  });
+  if (status === 'loading') for (let k = 0; k < Math.min(6, Number(d.n_galeria) || 4); k++) { const sk = document.createElement('div'); sk.className = 'sk dash-skeleton'; gal.append(sk); }
+  if (status === 'error') { const e = document.createElement('p'); e.className = 'pf-count'; e.textContent = 'Não foi possível carregar a galeria.'; gal.append(e); }
+  gsec.append(gh, gal);
+  det.append(nav, wrap);
+  if (items.length > 1 || status === 'loading') det.append(gsec);
+}
+document.addEventListener('keydown', e => {
+  if (state.view !== 'projeto' || !state.open || /input|textarea/i.test(e.target.tagName)) return;
+  { const z = document.getElementById('pf-zoom'); if (z && !z.hidden) return; }
+  const d = projetosCache.find(x => x.projeto === state.open); if (!d) return;
+  const n = galeriaDe(d).items.length; if (n < 2) return;
+  if (e.key === 'ArrowRight') { state.sel = (state.sel + 1) % n; drawDetalhe(projetosCache); }
+  if (e.key === 'ArrowLeft') { state.sel = (state.sel - 1 + n) % n; drawDetalhe(projetosCache); }
+});
+
+document.querySelectorAll('.pf-nav button').forEach(b => b.addEventListener('click', () => { if (b.dataset.tab === 'projetos') goProjetos(); else if (b.dataset.tab === 'projeto' && state.open) openProjeto(state.open); else { showTab('geral'); dash.setLink('titulo'); } }));
+document.querySelectorAll('[data-tile]').forEach(t => {
+  const go = () => { const k = t.dataset.tile;
+    if (k === 'eventos') goProjetos('Eventos e cursos');
+    else if (k === 'boletins') openProjeto('Boletins de Conjuntura');
+    else if (k === 'itens') document.getElementById('itens').scrollIntoView({block: 'start', behavior: 'smooth'});
+    else goProjetos('', k); };
+  t.addEventListener('click', go); t.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+});
+document.querySelectorAll('[data-goto=projetos]').forEach(t => { t.addEventListener('click', () => goProjetos('')); t.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goProjetos(''); } }); });
+document.getElementById('busca').addEventListener('input', e => { state.q = e.target.value; drawProjetos(); });
+let linked = false;
+
+dash.calc('matriz', {
+  inputs: ['projetos'],
+  title: 'Itens por linha e ano',
+  description: 'Soma dos itens produzidos por linha de trabalho e ano de início do projeto.',
+  fn: (projetos) => {
+    const m = new Map();
+    for (const p of projetos) {
+      const k = p.linha + '|' + p.ano;
+      const r = m.get(k) || {linha: p.linha, ano: String(p.ano), itens: 0, projetos: 0};
+      r.itens += Number(p.pecas) || 0; r.projetos += 1; m.set(k, r);
+    }
+    return [...m.values()];
+  }
+});
+const tbState = {k: 'pecas', dir: -1, q: ''};
+function drawMatriz(rows) {
+  const el = document.getElementById('ch-matriz'); el.innerHTML = '';
+  const anos = ['2021', '2022', '2023', '2024', '2025', '2026'];
+  const linhas = ORDEM.filter(l => rows.some(r => r.linha === l));
+  const W = Math.max(300, el.clientWidth), narrow = W < 560;
+  const meas = d3.select(el).append('svg').append('text').attr('font-size', 12); let lw = 0;
+  linhas.forEach(l => { meas.text(l); lw = Math.max(lw, meas.node().getComputedTextLength()); }); el.innerHTML = '';
+  const left = narrow ? 0 : lw + 16, top = narrow ? 0 : 0, rowH = narrow ? 52 : 40, headH = 26;
+  const cols = anos.concat(['Total']);
+  const cw = (W - left) / cols.length;
+  const H = headH + linhas.length * rowH + rowH;
+  const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  const max = d3.max(rows, r => r.itens) || 1;
+  const t = tip(el.closest('.pf-card'));
+  cols.forEach((c, j) => svg.append('text').attr('x', left + j * cw + cw / 2).attr('y', 16).attr('text-anchor', 'middle').attr('font-size', 12).attr('fill', 'var(--color-fg-muted)').text(c));
+  const tot = {}; let all = 0;
+  linhas.forEach((l, i) => {
+    const y = headH + i * rowH;
+    if (narrow) svg.append('text').attr('x', 2).attr('y', y + 12).attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(l);
+    else svg.append('text').attr('x', left - 10).attr('y', y + rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'end').attr('font-size', 12).attr('fill', 'var(--color-fg)').text(l);
+    let sum = 0, np = 0;
+    anos.forEach((a, j) => {
+      const r = rows.find(x => x.linha === l && x.ano === a); const v = r ? r.itens : 0; sum += v; np += r ? r.projetos : 0;
+      tot[a] = (tot[a] || 0) + v;
+      const cy = narrow ? y + 16 : y + 3, ch = narrow ? rowH - 20 : rowH - 6;
+      const g = svg.append('g').attr('class', v ? 'cell' : '');
+      g.append('rect').attr('x', left + j * cw + 2).attr('y', cy).attr('width', cw - 4).attr('height', ch).attr('rx', 4)
+        .attr('fill', v ? LCOL(l) : 'var(--color-bg)').attr('fill-opacity', v ? 0.18 + 0.82 * Math.sqrt(v / max) : 1);
+      if (v) {
+        g.append('text').attr('x', left + j * cw + cw / 2).attr('y', cy + ch / 2).attr('dy', '0.35em').attr('text-anchor', 'middle').attr('font-size', 12)
+          .attr('fill', v / max > 0.35 ? 'var(--color-bg)' : 'var(--color-fg)').text(nf.format(v));
+        g.on('mousemove', ev => t.show(ev, [`${l} · ${a}`, `${nf.format(v)} itens em ${r.projetos} ${r.projetos === 1 ? 'projeto' : 'projetos'}`, 'Clique para ver os projetos']))
+          .on('mouseleave', () => t.hide()).on('click', () => { t.hide(); state.ano = a; goProjetos(l, 'ano'); });
+      }
+    });
+    all += sum;
+    const cy = narrow ? y + 16 : y + 3, ch = narrow ? rowH - 20 : rowH - 6;
+    svg.append('text').attr('x', left + anos.length * cw + cw / 2).attr('y', cy + ch / 2).attr('dy', '0.35em').attr('text-anchor', 'middle').attr('font-size', 12).attr('font-weight', 600).attr('fill', 'var(--color-fg)').text(nf.format(sum));
+  });
+  const yT = headH + linhas.length * rowH;
+  svg.append('line').attr('x1', 0).attr('x2', W).attr('y1', yT + 2).attr('y2', yT + 2).attr('stroke', 'var(--cds-chart-grid)');
+  if (!narrow) svg.append('text').attr('x', left - 10).attr('y', yT + rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'end').attr('font-size', 12).attr('fill', 'var(--color-fg-muted)').text('Total');
+  anos.forEach((a, j) => svg.append('text').attr('x', left + j * cw + cw / 2).attr('y', yT + rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'middle').attr('font-size', 12).attr('font-weight', 600).attr('fill', 'var(--color-fg)').text(nf.format(tot[a] || 0)));
+  svg.append('text').attr('x', left + anos.length * cw + cw / 2).attr('y', yT + rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'middle').attr('font-size', 12).attr('font-weight', 700).attr('fill', 'var(--color-fg)').text(nf.format(all));
+}
+function drawTabela(rows) {
+  const tb = document.querySelector('#tb-itens tbody'); tb.innerHTML = '';
+  const q = tbState.q.toLowerCase();
+  const num = k => ['pecas', 'componentes', 'n_galeria', 'ano'].includes(k);
+  const list = rows.filter(d => !q || (d.projeto + ' ' + d.linha).toLowerCase().includes(q)).slice().sort((a, b) => {
+    const x = a[tbState.k], y = b[tbState.k];
+    return (num(tbState.k) ? (Number(x) - Number(y)) : String(x).localeCompare(String(y), 'pt-BR')) * tbState.dir;
+  });
+  const max = d3.max(rows, d => Number(d.pecas)) || 1;
+  const cols = [...document.querySelectorAll('#tb-itens thead th')].map(th => th.dataset.field);
+  for (const d of list) {
+    const tr = document.createElement('tr');
+    cols.forEach(c => {
+      const td = document.createElement('td');
+      if (c === 'pecas') { td.className = 'num'; const b = document.createElement('span'); b.className = 'bar'; b.style.width = Math.max(2, 64 * Number(d.pecas) / max) + 'px'; b.style.background = LCOL(d.linha); td.append(b, document.createTextNode(nf.format(Number(d.pecas)))); }
+      else if (c === 'componentes' || c === 'n_galeria') { td.className = 'num hide-sm'; td.textContent = nf.format(Number(d[c]) || 0); }
+      else if (c === 'linha' || c === 'produto_opas') { td.className = 'hide-sm'; td.textContent = d[c]; }
+      else td.textContent = d[c];
+      tr.append(td);
+    });
+    tr.addEventListener('click', () => openProjeto(d.projeto));
+    tb.append(tr);
+  }
+}
+document.querySelectorAll('#tb-itens th button').forEach(b => b.addEventListener('click', () => {
+  const k = b.dataset.k; tbState.dir = tbState.k === k ? -tbState.dir : (['projeto', 'linha', 'produto_opas'].includes(k) ? 1 : -1); tbState.k = k;
+  document.querySelectorAll('#tb-itens th button').forEach(x => x.removeAttribute('aria-sort'));
+  b.setAttribute('aria-sort', tbState.dir < 0 ? 'descending' : 'ascending'); drawTabela(projetosCache);
+}));
+document.getElementById('busca-itens').addEventListener('input', e => { tbState.q = e.target.value; drawTabela(projetosCache); });
+function drawCharts() {
+  if (document.getElementById('view-geral').hidden) return;
+  const L = dash.data('por_linha'), A = dash.data('por_ano'), P = dash.data('projetos');
+  const chL = document.getElementById('ch-linhas'), chA = document.getElementById('ch-anos'), chT = document.getElementById('ch-tempo');
+  if (!chL.clientWidth) return;
+  if (L.status === 'ok') drawLinhas(L.data); else if (L.status === 'error') failed(chL); else chL.innerHTML = '';
+  if (A.status === 'ok' && A.data.length) drawAnos(A.data); else if (A.status === 'error') failed(chA); else chA.innerHTML = '';
+  if (P.status === 'ok') drawTempo(P.data); else if (P.status === 'error') failed(chT); else chT.innerHTML = '';
+  const M = dash.data('matriz'), chM = document.getElementById('ch-matriz');
+  if (M.status === 'ok') drawMatriz(M.data); else if (M.status === 'error') failed(chM); else chM.innerHTML = '';
+  if (P.status === 'ok') drawTabela(P.data);
+}
+
+dash.onData(() => {
+  const P = dash.data('projetos'), R = dash.data('resumo'), L = dash.data('por_linha'), A = dash.data('por_ano'), I = dash.data('indicadores');
+  legend('leg-tempo', ORDEM.map(l => [LCOL(l), l]));
+
+  if (R.status === 'ok' && R.data.length) {
+    const s = R.data[0];
+    setVal('[data-source="resumo"][data-field="projetos"]', nf.format(s.projetos));
+    setVal('[data-source="resumo"][data-field="pecas"]', nf.format(s.pecas));
+    setVal('[data-source="resumo"][data-field="componentes"]', nf.format(s.componentes));
+    setVal('[data-source="resumo"][data-field="eventos"]', nf.format(s.eventos));
+    setVal('#resumo', s.frase);
+
+  } else if (R.status === 'error') { setVal('#resumo', ''); }
+
+  if (I.status === 'ok') {
+    const e = I.data.find(d => d.indicador === 'edicoes_boletim');
+    setVal('[data-source="indicadores"][data-where="indicador=edicoes_boletim"]', e ? nf.format(Number(e.valor)) : '—');
+    const af = I.data.find(d => d.indicador === 'arquivos_fonte_desid');
+    setVal('[data-source="indicadores"][data-where="indicador=arquivos_fonte_desid"]', af ? nf.format(Number(af.valor)) : '—');
+    const fp = I.data.filter(d => String(d.indicador).startsWith('fonte_')).map(d => d.indicador.slice(6) + ' ' + nf.format(Number(d.valor)));
+    document.getElementById('fontes-prog').textContent = fp.length ? 'Desid, sem versões nem exportações: ' + fp.join(' · ') : '—';
+  }
+
+  drawCharts();
+  if (L.status === 'ok' && L.data.length > 1) { const tot = L.data.reduce((s, r) => s + r.total, 0); document.getElementById('linhas-titulo').textContent = `${L.data[0].linha} e ${L.data[1].linha.toLowerCase()} somam ${pct.format((L.data[0].total + L.data[1].total) / tot)} dos itens`; }
+
+  const chT = document.getElementById('ch-tempo');
+  if (P.status === 'ok') {
+    projetosCache = P.data; drawEco();
+    drawProjetos();
+    if (state.view === 'projeto' && state.open) drawDetalhe(P.data);
+    if (!linked) {
+      linked = true;
+      const h = location.hash.slice(1);
+      if (h === 'lista') goProjetos('');
+      else if (h === 'titulo') showTab('geral');
+      else if (h.startsWith('p-')) { const d = P.data.find(r => 'p-' + slug(r.projeto) === h); if (d) openProjeto(d.projeto); }
+    }
+  }
+});
+</script>
+
+<footer class="site-foot">Trabalhos produzidos como consultor via OPAS para o Ministério da Saúde. As peças pertencem às respectivas instituições e são exibidas aqui apenas como registro de portfólio.</footer>
+</div>
+</body>
+</html>
